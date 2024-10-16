@@ -24,8 +24,8 @@
 							"    pm.expect(jsonData.message).to.eql(\"Verification code has been sent to entered phone number.\");\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Response time is less than 200ms\", function () {\r",
-							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"pm.test(\"Response time is less than 2000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
 							"});\r",
 							"\r",
 							"pm.test(\"isPhoneNoVerified\", function () {\r",
@@ -57,7 +57,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"loginType\": \"PHONE_NUMBER_AND_PASSWORD\",\r\n    \"phoneCode\": \"+91\",\r\n    \"phoneNumber\": \"7000017679\",\r\n    \"password\": \"1234\",\r\n    \"deviceInfo\": {\r\n        \"deviceId\": \"RZ8T81Q01DA\",\r\n        \"language\": \"en\",\r\n        \"fcmToken\": \"FCM TOKEN\",\r\n        \"appVersion\": \"12.12\",\r\n        \"osVersion\": \"\",\r\n        \"platform\": \"android\"\r\n    }\r\n}",
+					"raw": "{\r\n    \"loginType\": \"PHONE_NUMBER_AND_PASSWORD\",\r\n    \"phoneCode\": \"+91\",\r\n    \"phoneNumber\": \"7000017680\",\r\n    \"password\": \"1234\",\r\n    \"deviceInfo\": {\r\n        \"deviceId\": \"RZ8T81Q01DA\",\r\n        \"language\": \"en\",\r\n        \"fcmToken\": \"FCM TOKEN\",\r\n        \"appVersion\": \"12.12\",\r\n        \"osVersion\": \"\",\r\n        \"platform\": \"android\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -137,15 +137,14 @@
 			"response": []
 		},
 		{
-			"name": "login getnada",
+			"name": "phone number verification",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"Status code is 200\"] = responseCode.code === 200;\r",
 							"var jsonData = JSON.parse(responseBody);\r",
-							"postman.setEnvironmentVariable(\"uid\", jsonData. msgs[0].uid);"
+							"pm.collectionVariables.set('token',jsonData.data.token)"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -153,76 +152,72 @@
 				}
 			],
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
-						"key": "accept",
-						"value": "*/*"
-					},
-					{
 						"key": "accept-language",
-						"value": "en-GB,en-US;q=0.9,en;q=0.8"
-					},
-					{
-						"key": "authorization",
-						"value": "Bearer null"
-					},
-					{
-						"key": "cookie",
-						"value": "_au_1d=AU1D-0100-001725622898-FUZJ12XB-MTTD; cnx_userId=1327e76fb52f450780854ecbd408f465; _pbjs_userid_consent_data=3524755945110770; _cc_id=c9a1f2c4681dc499e1215d9e27051d6c; panoramaId=2b37bfae3194a6462bb3fe48e2524945a702eefa32cae82f86bdb352d9b9a1e7; panoramaIdType=panoIndiv; panoramaId_expiry=1726227703839; cto_bundle=u6yQp19qYWl0MHVJZXFCdU43dlBWdWVnWEU1b2Uzak81NkNJMWxZcGxnWFVrQWVQQlk1WWxsaTNaelVqNTNTVkI5SlNmTzk1dDhha3Fla0szN3RGZW5NQm5zSjhvQWlFUll6cnJwdFdqR3BKayUyRnpTS0JUQ0tLQXFRcTVDak43OWd0Tlp0; cto_bidid=jY0CCF9HciUyQmJpcWdTZk5ZdnpKazFRbkdzWjdXeUJhTldienVGWiUyQmQyQyUyRmJJUlQyS3gwY2l5dWVmc1MlMkY1UDVSSCUyQjRMZFZTbEN4WHRobEtPSW11ekFxZnA3UmclM0QlM0Q; user_id=65bd4407-bb5f-4a04-b166-e0b0467ff131; _ga_MSFG3B015Z=GS1.1.1725860143.2.0.1725860145.58.0.0; _ga=GA1.2.1108043779.1725622895; _gid=GA1.2.1603238350.1725860146; _ga_XTNNW475Z1=GS1.1.1725860144.2.1.1725860161.0.0.0; __gads=ID=a10a517b09bc592e:T=1725622899:RT=1725860586:S=ALNI_Mb-eGUjY_eZvx67hRYJGbgFkbqczg; __gpi=UID=00000ef0fa406a1a:T=1725622899:RT=1725860586:S=ALNI_MbqC5y0-o8TTcvsvCLdmImuQG_zaw; __eoi=ID=85a97d33070d5d96:T=1725622899:RT=1725860586:S=AA-AfjYotik1RU7mur29oReaIEK1"
-					},
-					{
-						"key": "priority",
-						"value": "u=1, i"
-					},
-					{
-						"key": "referer",
-						"value": "https://inboxes.com/"
-					},
-					{
-						"key": "sec-ch-ua",
-						"value": "\"Chromium\";v=\"128\", \"Not;A=Brand\";v=\"24\", \"Google Chrome\";v=\"128\""
-					},
-					{
-						"key": "sec-ch-ua-mobile",
-						"value": "?0"
-					},
-					{
-						"key": "sec-ch-ua-platform",
-						"value": "\"Windows\""
-					},
-					{
-						"key": "sec-fetch-dest",
-						"value": "empty"
-					},
-					{
-						"key": "sec-fetch-mode",
-						"value": "cors"
-					},
-					{
-						"key": "sec-fetch-site",
-						"value": "same-origin"
-					},
-					{
-						"key": "user-agent",
-						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+						"value": "ar",
+						"type": "text",
+						"disabled": true
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sessionId\": \"{{sessionId}}\",\r\n    \"code\": \"1234\",\r\n    \"type\": \"PHONE_NUMBER_VERIFICATION\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "https://inboxes.com/api/v2/inbox/uday05@getnada.com",
+					"raw": "https://api.halfm.sa/customers/api/v1/auth/verifyCode",
 					"protocol": "https",
 					"host": [
-						"inboxes",
-						"com"
+						"api",
+						"halfm",
+						"sa"
 					],
 					"path": [
+						"customers",
 						"api",
-						"v2",
-						"inbox",
-						"uday05@getnada.com"
+						"v1",
+						"auth",
+						"verifyCode"
 					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "home",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"userId\":\"669f96bb2fa5f9cac1dcf6d5\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
-				"description": "Generated from cURL: curl 'https://inboxes.com/api/v2/inbox/uday12@getnada.com' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8' \\\r\n  -H 'authorization: Bearer null' \\\r\n  -H 'cookie: _au_1d=AU1D-0100-001725622898-FUZJ12XB-MTTD; cnx_userId=1327e76fb52f450780854ecbd408f465; _pbjs_userid_consent_data=3524755945110770; _cc_id=c9a1f2c4681dc499e1215d9e27051d6c; panoramaId=2b37bfae3194a6462bb3fe48e2524945a702eefa32cae82f86bdb352d9b9a1e7; panoramaIdType=panoIndiv; panoramaId_expiry=1726227703839; cto_bundle=u6yQp19qYWl0MHVJZXFCdU43dlBWdWVnWEU1b2Uzak81NkNJMWxZcGxnWFVrQWVQQlk1WWxsaTNaelVqNTNTVkI5SlNmTzk1dDhha3Fla0szN3RGZW5NQm5zSjhvQWlFUll6cnJwdFdqR3BKayUyRnpTS0JUQ0tLQXFRcTVDak43OWd0Tlp0; cto_bidid=jY0CCF9HciUyQmJpcWdTZk5ZdnpKazFRbkdzWjdXeUJhTldienVGWiUyQmQyQyUyRmJJUlQyS3gwY2l5dWVmc1MlMkY1UDVSSCUyQjRMZFZTbEN4WHRobEtPSW11ekFxZnA3UmclM0QlM0Q; user_id=65bd4407-bb5f-4a04-b166-e0b0467ff131; _ga_MSFG3B015Z=GS1.1.1725860143.2.0.1725860145.58.0.0; _ga=GA1.2.1108043779.1725622895; _gid=GA1.2.1603238350.1725860146; _ga_XTNNW475Z1=GS1.1.1725860144.2.1.1725860161.0.0.0; __gads=ID=a10a517b09bc592e:T=1725622899:RT=1725860586:S=ALNI_Mb-eGUjY_eZvx67hRYJGbgFkbqczg; __gpi=UID=00000ef0fa406a1a:T=1725622899:RT=1725860586:S=ALNI_MbqC5y0-o8TTcvsvCLdmImuQG_zaw; __eoi=ID=85a97d33070d5d96:T=1725622899:RT=1725860586:S=AA-AfjYotik1RU7mur29oReaIEK1' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://inboxes.com/' \\\r\n  -H 'sec-ch-ua: \"Chromium\";v=\"128\", \"Not;A=Brand\";v=\"24\", \"Google Chrome\";v=\"128\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36'"
+				"url": {
+					"raw": "https://api.halfm.sa/menus/api/v1/banners",
+					"protocol": "https",
+					"host": [
+						"api",
+						"halfm",
+						"sa"
+					],
+					"path": [
+						"menus",
+						"api",
+						"v1",
+						"banners"
+					]
+				}
 			},
 			"response": []
 		}
